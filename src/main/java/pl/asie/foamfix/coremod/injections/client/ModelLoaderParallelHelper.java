@@ -78,7 +78,8 @@ public class ModelLoaderParallelHelper extends ModelBakery {
     }
 
     public static void bake(Map<IModel, IBakedModel> bakedModels, Multimap<IModel, ModelResourceLocation> models, IModel missingModel, IBakedModel missingBaked) {
-        ProgressManager.ProgressBar bakeBar = ProgressManager.push("ModelLoader: baking", models.size());
+        try{
+            ProgressManager.ProgressBar bakeBar = ProgressManager.push("ModelLoader: baking", models.size());
 
         for (IModel model : models.keySet()) {
             bakeBar.step("[" + Joiner.on(", ").join(models.get(model)) + "]");
@@ -91,5 +92,10 @@ public class ModelLoaderParallelHelper extends ModelBakery {
         }
 
         ProgressManager.pop(bakeBar);
+        catch(Execption e){
+            System.out.printl("Stopped baking:")
+            e.printStackTrace()
+        }
+        
     }
 }
